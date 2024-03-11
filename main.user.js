@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Find Tripletex Gaps
 // @namespace    https://github.com/FlemmingMP/tripletex-find-gaps
-// @version      0.1.1
+// @version      0.1.2
 // @description  Show gaps in time sheet
 // @author       FlemmingMP
 // @updateURL    https://github.com/FlemmingMP/tripletex-find-gaps/raw/main/main.user.js
@@ -75,7 +75,7 @@
           if (startArr[index] > endArr[index]) {
             text = text + ` - Gap between ${endArr[index]} and ${startArr[index]}`
           } else if (startArr[index] < endArr[index]) {
-            text = text + ` - Overlap between ${endArr[index]} and ${startArr[index]}`
+            text = text + ` - Overlap between ${startArr[index]} and ${endArr[index]}`
           }
         }
       }
