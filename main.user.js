@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Find Tripletex Gaps
 // @namespace    https://github.com/FlemmingMP/tripletex-find-gaps
-// @version      0.05
+// @version      0.1
 // @description  Show gaps in time sheet
 // @author       FlemmingMP
 // @updateURL    https://github.com/FlemmingMP/tripletex-find-gaps/raw/main/main.user.js
@@ -30,7 +30,7 @@
     setTimeout(() => {
       delayCount++
       main();
-    }, "100");  
+    }, "500");  
   }
 
   function main() {
