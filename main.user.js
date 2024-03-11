@@ -4,8 +4,8 @@
 // @version      0.05
 // @description  Show gaps in time sheet
 // @author       FlemmingMP
-// @updateUrl    https://github.com/FlemmingMP/tripletex-find-gaps/main.user.js
-// @downloadUrl  https://github.com/FlemmingMP/tripletex-find-gaps/main.user.js
+// @updateURL    https://github.com/FlemmingMP/tripletex-find-gaps/raw/main/main.user.js
+// @downloadURL  https://github.com/FlemmingMP/tripletex-find-gaps/raw/main/main.user.js
 // @match        https://tripletex.no/execute/updateHourlist*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
