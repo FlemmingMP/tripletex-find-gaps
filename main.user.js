@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Find Tripletex Gaps
 // @namespace    https://github.com/FlemmingMP/tripletex-find-gaps
-// @version      0.1
+// @version      0.1.1
 // @description  Show gaps in time sheet
 // @author       FlemmingMP
 // @updateURL    https://github.com/FlemmingMP/tripletex-find-gaps/raw/main/main.user.js
@@ -29,8 +29,8 @@
   function runDelay() {
     setTimeout(() => {
       delayCount++
-      main();
-    }, "500");  
+      main()
+    }, "500")  
   }
 
   function main() {
@@ -42,7 +42,7 @@
   }
 
   function findDays() {
-    const dayNodes = document.querySelectorAll(siteValues.weekdayID);
+    const dayNodes = document.querySelectorAll(siteValues.weekdayID)
 
     if (dayNodes.length === 0) {
       return -1
@@ -89,4 +89,4 @@
     })
     return 0
   }
-})();
+})()
