@@ -82,11 +82,11 @@
               text = text + ` - Overlap between ${startArr[index]} and ${endArr[index]}`
             }
           }
-        }  
+        }
       }
 
       // Add string to row
-      node.innerHTML =
+      node.innerHTML = 
       `<td colspan="4">
         <strong>${dayText}</strong>
         <span>${text}</span>
