@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Find Tripletex Gaps
 // @namespace    https://github.com/FlemmingMP/tripletex-find-gaps
-// @version      0.1.2
+// @version      0.1.3
 // @description  Show gaps in time sheet
 // @author       FlemmingMP
 // @updateURL    https://github.com/FlemmingMP/tripletex-find-gaps/raw/main/main.user.js
@@ -30,7 +30,7 @@
     setTimeout(() => {
       delayCount++
       main()
-    }, "500")  
+    }, "500")
   }
 
   function main() {
@@ -49,19 +49,20 @@
     }
 
     dayNodes.forEach((node) => {
-
-      let num = siteValues.commentNum
+      const num = siteValues.commentNum
       let curNode = node
       let stringArr = []
       let startArr = []
       let endArr = []
-      let dayText = node.innerText
+      const dayText = node.innerText
       let text = ""
 
       // Find all strings with time
-      while (curNode.nextSibling.nextSibling && curNode.nextSibling.nextSibling.childNodes[num] && node.nextSibling.nextSibling.childNodes[num].innerText !== '') {
+      while (curNode.nextSibling.nextSibling &&
+        curNode.nextSibling.nextSibling.childNodes[num] &&
+        node.nextSibling.nextSibling.childNodes[num].innerText !== '') {
         curNode = curNode.nextSibling.nextSibling
-        curNode.childNodes[num].querySelectorAll("b").forEach(node => stringArr.push(node.innerText))
+        curNode.childNodes[num].querySelectorAll("strong").forEach(node => stringArr.push(node.innerText))
       }
 
       // Sort and organize time strings
@@ -70,18 +71,22 @@
       endArr = stringArr.filter(string => !string.startsWith("(")).sort().slice(0, -1).map(string => string.slice(0, -1))
 
       // Build string
-      for (let index = 0; index < startArr.length; index++) {
-        if (!startArr[index].includes(endArr[index])) {
-          if (startArr[index] > endArr[index]) {
-            text = text + ` - Gap between ${endArr[index]} and ${startArr[index]}`
-          } else if (startArr[index] < endArr[index]) {
-            text = text + ` - Overlap between ${startArr[index]} and ${endArr[index]}`
+      if (startArr[startArr.length - 1] !== endArr[endArr.length - 1]) {
+        text = " - Cannot calculate gap. Clock is still running or input is broken."
+      } else {
+        for (let index = 0; index < startArr.length; index++) {
+          if (!startArr[index].includes(endArr[index])) {
+            if (startArr[index] > endArr[index]) {
+              text = text + ` - Gap between ${endArr[index]} and ${startArr[index]}`
+            } else if (startArr[index] < endArr[index]) {
+              text = text + ` - Overlap between ${startArr[index]} and ${endArr[index]}`
+            }
           }
-        }
+        }  
       }
 
       // Add string to row
-      node.innerHTML = 
+      node.innerHTML =
       `<td colspan="4">
         <strong>${dayText}</strong>
         <span>${text}</span>
