@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Find Tripletex Gaps
 // @namespace    https://github.com/FlemmingMP/tripletex-find-gaps
-// @version      0.1.3
+// @version      0.1.4
 // @description  Show gaps in time sheet
 // @author       FlemmingMP
 // @updateURL    https://github.com/FlemmingMP/tripletex-find-gaps/raw/main/main.user.js
@@ -71,7 +71,7 @@
       endArr = stringArr.filter(string => !string.startsWith("(")).sort().slice(0, -1).map(string => string.slice(0, -1))
 
       // Build string
-      if (startArr[startArr.length - 1] !== endArr[endArr.length - 1]) {
+      if (endArr[0] === "") {
         text = " - Cannot calculate gap. Clock is still running or input is broken."
       } else {
         for (let index = 0; index < startArr.length; index++) {
