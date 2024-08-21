@@ -30,7 +30,7 @@
     setTimeout(() => {
       delayCount++
       main()
-    }, "500")  
+    }, "500")
   }
 
   function main() {
@@ -49,13 +49,12 @@
     }
 
     dayNodes.forEach((node) => {
-
-      let num = siteValues.commentNum
+      const num = siteValues.commentNum
       let curNode = node
       let stringArr = []
       let startArr = []
       let endArr = []
-      let dayText = node.innerText
+      const dayText = node.innerText
       let text = ""
 
       // Find all strings with time
@@ -83,7 +82,7 @@
       }
 
       // Add string to row
-      node.innerHTML = 
+      node.innerHTML =
       `<td colspan="4">
         <strong>${dayText}</strong>
         <span>${text}</span>
