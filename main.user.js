@@ -71,14 +71,18 @@
       endArr = stringArr.filter(string => !string.startsWith("(")).sort().slice(0, -1).map(string => string.slice(0, -1))
 
       // Build string
-      for (let index = 0; index < startArr.length; index++) {
-        if (!startArr[index].includes(endArr[index])) {
-          if (startArr[index] > endArr[index]) {
-            text = text + ` - Gap between ${endArr[index]} and ${startArr[index]}`
-          } else if (startArr[index] < endArr[index]) {
-            text = text + ` - Overlap between ${startArr[index]} and ${endArr[index]}`
+      if (startArr[startArr.length - 1] !== endArr[endArr.length - 1]) {
+        text = " - Cannot calculate gap. Clock is still running or input is broken."
+      } else {
+        for (let index = 0; index < startArr.length; index++) {
+          if (!startArr[index].includes(endArr[index])) {
+            if (startArr[index] > endArr[index]) {
+              text = text + ` - Gap between ${endArr[index]} and ${startArr[index]}`
+            } else if (startArr[index] < endArr[index]) {
+              text = text + ` - Overlap between ${startArr[index]} and ${endArr[index]}`
+            }
           }
-        }
+        }  
       }
 
       // Add string to row
