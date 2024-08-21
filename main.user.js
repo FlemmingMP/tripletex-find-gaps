@@ -59,9 +59,11 @@
       let text = ""
 
       // Find all strings with time
-      while (curNode.nextSibling.nextSibling && curNode.nextSibling.nextSibling.childNodes[num] && node.nextSibling.nextSibling.childNodes[num].innerText !== '') {
+      while (curNode.nextSibling.nextSibling &&
+        curNode.nextSibling.nextSibling.childNodes[num] &&
+        node.nextSibling.nextSibling.childNodes[num].innerText !== '') {
         curNode = curNode.nextSibling.nextSibling
-        curNode.childNodes[num].querySelectorAll("b").forEach(node => stringArr.push(node.innerText))
+        curNode.childNodes[num].querySelectorAll("strong").forEach(node => stringArr.push(node.innerText))
       }
 
       // Sort and organize time strings
