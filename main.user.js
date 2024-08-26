@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Find Tripletex Gaps
 // @namespace    https://github.com/FlemmingMP/tripletex-find-gaps
-// @version      0.1.4
+// @version      0.1.5
 // @description  Show gaps in time sheet
 // @author       FlemmingMP
 // @updateURL    https://github.com/FlemmingMP/tripletex-find-gaps/raw/main/main.user.js
@@ -16,11 +16,20 @@
 
   const siteValues = {
     weekdayID: '[id^="timeReportTableWeekdayRow"]',
-    commentNum: 7
+    commentNum: 7,
+    retryCount: 10,
+    retryDelay: 500,
   }
 
   let delayCount = 0
-  let maxDelay = 10
+  let maxDelay = siteValues.retryCount
+
+  let timeout
+
+  function debounce(callback, wait = 500) {
+    clearTimeout(timeout);
+    timeout = setTimeout(callback, wait);
+  } 
 
   // Run after site loads since it takes time
   // Set a limit on retries so it doesn't run forever
@@ -30,7 +39,8 @@
     setTimeout(() => {
       delayCount++
       main()
-    }, "500")
+      observeChange()
+    }, siteValues.retryDelay)
   }
 
   function main() {
@@ -93,5 +103,32 @@
       </td>`
     })
     return 0
+  }
+
+  function observeChange() {
+    // Select head node that will be observed for mutations
+    const targetNode = document.getElementsByTagName("head")[0]
+
+    // Option for the observer
+    const config = { childList: true }
+
+    // Callback function to execute when mutations are observed
+    const callback = (mutationList, observer) => {
+      for (const mutation of mutationList) {
+        if (mutation.type === "childList") {
+          // Debounce since it'll trigger multiple times
+          debounce(() => {
+            main()
+          }, 100);
+        }
+      }
+    };
+
+    // Create an observer instance linked to the callback function
+    const observer = new MutationObserver(callback);
+
+    // Start observing the target node for configured mutations
+    observer.observe(targetNode, config);
+
   }
 })()
